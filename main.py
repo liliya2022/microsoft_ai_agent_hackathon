@@ -6,9 +6,13 @@ from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import PydanticOutputParser
 from langchain.agents import create_tool_calling_agent, AgentExecutor
 from langchain.tools import Tool
+from agent_logger import AgentLogger
 
 # Load environment variables
 load_dotenv()
+
+# Initialize logger
+logger = AgentLogger()
 
 # Define response model
 class MentalHealthResponse(BaseModel):
@@ -85,14 +89,29 @@ agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
 
 # Example usage
 if __name__ == "__main__":
+    print("Mental Health Support Agent initialized. Type 'quit' to exit.")
+    print("Note: All conversations are logged for quality improvement purposes.")
+    
     while True:
         user_input = input("\nHow can I help you today? (Type 'quit' to exit): ")
         if user_input.lower() == 'quit':
+            # Print session summary before exiting
+            print("\nSession Summary:")
+            print(logger.export_session())
             break
             
         try:
             response = agent_executor.invoke({"input": user_input})
             print("\nResponse:", response["output"])
+            
+            # Log the interaction
+            logger.log_interaction(user_input, response)
+            
+            # If emergency flag is set, show additional warning
+            if response.get("emergency", False):
+                print("\n⚠️ IMPORTANT: Based on your input, we strongly recommend seeking immediate professional help.")
+                print("Please contact emergency services or a mental health professional right away.")
+                
         except Exception as e:
             print(f"An error occurred: {e}")
             print("Please try again or seek immediate professional help if you're in crisis.")
