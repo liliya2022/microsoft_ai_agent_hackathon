@@ -51,34 +51,47 @@ If you're in crisis, please contact emergency services or a mental health profes
    ```
 
 2. **Interact with the agent**
+   - The agent will start in interactive mode
    - Type your concerns or questions
-   - The agent will respond with supportive messages and relevant resources
+   - Receive supportive responses with actionable steps
    - Type 'quit' to end the conversation
 
 ## 🛠️ Features
 
-- **Empathetic Responses**: The agent provides supportive and understanding responses
-- **Resource Database**: Access to various mental health resources and coping strategies
+- **Interactive Support**: Direct conversation with the mental health support agent
+- **Resource Tool**: Access to curated mental health resources and coping strategies
+- **Action-Oriented Responses**: Each response includes clear steps to take
 - **Safety Features**: 
   - Emergency resource recommendations
   - Professional help encouragement
-  - Crisis hotline information
+  - Crisis hotline information (988, 911)
 
 ## 📚 Available Resources
 
-The agent can provide information about:
+The agent provides access to:
 - General mental health resources
+  - National Suicide Prevention Lifeline: 988
+  - Crisis Text Line: Text HOME to 741741
+  - NAMI Helpline: 1-800-950-NAMI (6264)
+  - SAMHSA's National Helpline: 1-800-662-HELP (4357)
 - Anxiety management strategies
-- Depression support resources
-- Crisis intervention services
-- Professional help options
+  - ADAA resources
+  - Mindfulness apps
+  - Breathing exercises
+  - Relaxation techniques
+- Depression support
+  - NIMH resources
+  - DBSA support
+  - Exercise recommendations
+  - Sleep schedule guidance
 
 ## 🔧 Technical Details
 
 - Built with LangChain and OpenAI's GPT-4
-- Uses Pydantic for response validation
-- Implements tool-calling for resource retrieval
-- Maintains conversation context
+- Uses tool-calling agent for resource retrieval
+- Implements Pydantic models for structured responses
+- Features automatic emergency detection
+- Includes response processing for clear action items
 
 ## 🤝 Contributing
 
