@@ -14,12 +14,6 @@ load_dotenv()
 # Initialize logger
 logger = AgentLogger()
 
-# Define response model
-class MentalHealthResponse(BaseModel):
-    response: str = Field(description="The supportive response to the user's concern")
-    resources: Optional[List[str]] = Field(description="List of relevant mental health resources or coping strategies")
-    emergency: bool = Field(description="Whether the situation requires immediate professional help")
-
 # Initialize the LLM
 llm = ChatOpenAI(model="gpt-4", temperature=0.7)  # Using GPT-4 with slightly higher temperature for more empathetic responses
 
@@ -29,7 +23,7 @@ prompt = ChatPromptTemplate.from_messages([
     1. Listen actively and empathetically to users' concerns
     2. Provide supportive responses and coping strategies
     3. Identify when professional help is needed
-    4. Offer appropriate mental health resources
+    4. Offer appropriate mental health resources using the get_mental_health_resources tool
     5. NEVER provide medical diagnoses or treatment recommendations
     6. ALWAYS encourage seeking professional help for serious concerns
     
@@ -38,10 +32,18 @@ prompt = ChatPromptTemplate.from_messages([
     - Validate the user's feelings
     - Maintain professional boundaries
     - Prioritize user safety
-    - Suggest professional help when appropriate"""),
+    - Suggest professional help when appropriate
+    - Always use the get_mental_health_resources tool when providing resources
+    - Take action by suggesting specific resources and next steps"""),
     ("user", "{input}"),
     ("assistant", "{agent_scratchpad}"),
 ])
+
+# Define response model
+class MentalHealthResponse(BaseModel):
+    response: str = Field(description="The supportive response to the user's concern")
+    resources: Optional[List[str]] = Field(description="List of relevant mental health resources or coping strategies")
+    emergency: bool = Field(description="Whether the situation requires immediate professional help")
 
 # Create output parser
 parser = PydanticOutputParser(pydantic_object=MentalHealthResponse)
@@ -49,7 +51,6 @@ parser = PydanticOutputParser(pydantic_object=MentalHealthResponse)
 # Define tools for the agent
 def get_mental_health_resources(query: str) -> str:
     """Get relevant mental health resources based on the query."""
-    # This could be expanded to include a database of resources
     resources = {
         "general": [
             "National Suicide Prevention Lifeline: 988",
@@ -77,32 +78,54 @@ tools = [
     Tool(
         name="get_mental_health_resources",
         func=get_mental_health_resources,
-        description="Useful for finding mental health resources and coping strategies"
+        description="Useful for finding mental health resources and coping strategies. Always use this tool when providing resources to users."
     )
 ]
 
-# Create the agent
-agent = create_tool_calling_agent(llm, tools, prompt)
+# Create the agent with explicit tool usage
+agent = create_tool_calling_agent(
+    llm=llm,
+    tools=tools,
+    prompt=prompt
+)
 
-# Create the agent executor
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+# Create the agent executor with max iterations
+agent_executor = AgentExecutor(
+    agent=agent,
+    tools=tools,
+    verbose=True,
+    max_iterations=3,  # Allow multiple tool uses if needed
+    handle_parsing_errors=True
+)
 
-# Example usage
+def process_response(response):
+    """Process and format the agent's response with clear actions."""
+    output = response.get("output", "")
+    
+    # Add clear action items if not present
+    if "Here are some steps you can take" not in output:
+        output += "\n\nHere are some steps you can take:"
+        output += "\n1. Consider reaching out to a mental health professional"
+        output += "\n2. Try some of the coping strategies mentioned"
+        output += "\n3. Connect with support groups or trusted friends"
+        output += "\n4. Practice self-care and be kind to yourself"
+    
+    return output
+
 if __name__ == "__main__":
     print("Mental Health Support Agent initialized. Type 'quit' to exit.")
-    print("Note: All conversations are logged for quality improvement purposes.")
     
     while True:
         user_input = input("\nHow can I help you today? (Type 'quit' to exit): ")
         if user_input.lower() == 'quit':
-            # Print session summary before exiting
             print("\nSession Summary:")
             print(logger.export_session())
             break
             
         try:
             response = agent_executor.invoke({"input": user_input})
-            print("\nResponse:", response["output"])
+            processed_output = process_response(response)
+            print("\nResponse:", processed_output)
             
             # Log the interaction
             logger.log_interaction(user_input, response)
@@ -111,6 +134,7 @@ if __name__ == "__main__":
             if response.get("emergency", False):
                 print("\n⚠️ IMPORTANT: Based on your input, we strongly recommend seeking immediate professional help.")
                 print("Please contact emergency services or a mental health professional right away.")
+                print("You can call 988 (Suicide & Crisis Lifeline) or 911 for immediate assistance.")
                 
         except Exception as e:
             print(f"An error occurred: {e}")
