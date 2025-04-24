@@ -1,0 +1,15 @@
+{
+  "session_id": "20250421_194852",
+  "start_time": "2025-04-21 19:49:19",
+  "conversation": [
+    {
+      "timestamp": "2025-04-21T19:49:19.586606",
+      "user_input": "how to get rid of annoying friend? ",
+      "agent_response": {
+        "input": "how to get rid of annoying friend? ",
+        "output": "I understand that you're finding it difficult to deal with a friend who you feel is causing you stress or discomfort. It's important to remember that it's okay to prioritize your own wellbeing and mental health. Here are a few suggestions:\n\n1. Clear Communication: You could try expressing your feelings to your friend. They may not realize that their behavior is bothering you. \n2. Set Boundaries: It's okay to set limits on your interaction with them. This could mean limiting the time you spend together or the activities you do.\n3. Seek Support: You might find it helpful to discuss your feelings with a trusted individual in your life or a mental health professional.\n\nRemember, it's important to approach this situation with respect and kindness, both towards your friend and yourself. If this situation continues to stress you and you feel it's affecting your mental health, it may be beneficial to seek professional help."
+      },
+      "emergency_flag": false
+    }
+  ]
+}
