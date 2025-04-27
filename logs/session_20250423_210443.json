@@ -1,0 +1,17 @@
+{
+  "session_id": "20250423_210443",
+  "start_time": "2025-04-23 21:04:58",
+  "conversation": [
+    {
+      "timestamp": "2025-04-23T21:04:58.197956",
+      "user_input": "I recently lost someone close to me and I don\u2019t know how to deal with it.",
+      "agent_response": {
+        "output": "{'input': 'I recently lost someone close to me and I don\u2019t know how to deal with it.', 'chat_history': [HumanMessage(content='I recently lost someone close to me and I don\u2019t know how to deal with it.', additional_kwargs={}, response_metadata={}), AIMessage(content=\"I'm really sorry to hear about your loss. Grieving can be a profoundly difficult process, and it's completely normal to feel lost or unsure about how to cope. You're not alone in this, and many people have shared similar experiences. Let's take this one step at a time.\\n\\nGrief is deeply personal and there's no right or wrong way to experience it. Some people find it helpful to express their feelings through writing in a journal or talking with trusted friends or family members. Other times, taking care of your physical health by eating well, sleeping regularly, and getting some exercise can help manage the emotional challenge.\\n\\nIf you're open to it, I can also provide some more specific coping strategies that may help you navigate through this difficult time. Would you like me to do that?\", additional_kwargs={}, response_metadata={})], 'output': \"I'm really sorry to hear about your loss. Grieving can be a profoundly difficult process, and it's completely normal to feel lost or unsure about how to cope. You're not alone in this, and many people have shared similar experiences. Let's take this one step at a time.\\n\\nGrief is deeply personal and there's no right or wrong way to experience it. Some people find it helpful to express their feelings through writing in a journal or talking with trusted friends or family members. Other times, taking care of your physical health by eating well, sleeping regularly, and getting some exercise can help manage the emotional challenge.\\n\\nIf you're open to it, I can also provide some more specific coping strategies that may help you navigate through this difficult time. Would you like me to do that?\", 'intermediate_steps': []}",
+        "category": "general",
+        "emergency": false,
+        "follow_up_questions": []
+      },
+      "emergency_flag": false
+    }
+  ]
+}

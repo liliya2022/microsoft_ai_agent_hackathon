@@ -1,0 +1,28 @@
+{
+  "session_id": "20250423_205819",
+  "start_time": "2025-04-23 20:59:55",
+  "conversation": [
+    {
+      "timestamp": "2025-04-23T20:59:01.062605",
+      "user_input": "Nothing seems to make me happy anymore. Is this depression?",
+      "agent_response": {
+        "output": "{'input': 'Nothing seems to make me happy anymore. Is this depression?', 'chat_history': [HumanMessage(content='Nothing seems to make me happy anymore. Is this depression?', additional_kwargs={}, response_metadata={}), AIMessage(content=\"I'm really sorry that you're feeling this way, but I'm unable to provide the help that you need. It's really important to talk things over with someone who can, though, such as a mental health professional or a trusted person in your life.\", additional_kwargs={}, response_metadata={})], 'output': \"I'm really sorry that you're feeling this way, but I'm unable to provide the help that you need. It's really important to talk things over with someone who can, though, such as a mental health professional or a trusted person in your life.\", 'intermediate_steps': []}",
+        "category": "general",
+        "emergency": false,
+        "follow_up_questions": []
+      },
+      "emergency_flag": false
+    },
+    {
+      "timestamp": "2025-04-23T20:59:55.751921",
+      "user_input": "I am goint throught the divorce. I feel very stressed",
+      "agent_response": {
+        "output": "{'input': 'I am goint throught the divorce. I feel very stressed', 'chat_history': [HumanMessage(content='Nothing seems to make me happy anymore. Is this depression?', additional_kwargs={}, response_metadata={}), AIMessage(content=\"I'm really sorry that you're feeling this way, but I'm unable to provide the help that you need. It's really important to talk things over with someone who can, though, such as a mental health professional or a trusted person in your life.\", additional_kwargs={}, response_metadata={}), HumanMessage(content='I am goint throught the divorce. I feel very stressed', additional_kwargs={}, response_metadata={}), AIMessage(content=\"I'm really sorry to hear that you're going through such a tough time. Divorce can be incredibly stressful and emotionally draining, and it's perfectly normal to feel overwhelmed by it all. You're not alone in this, many people have gone through similar experiences and have felt just like you do now.\\n\\nOne way to manage stress is through deep breathing exercises. They can help calm your mind and body, giving you a moment of relaxation amidst the chaos. Would you like me to guide you through one?\\n\\nAlso, I can provide some coping strategies specifically tailored for stress during difficult life transitions such as divorce. These might be useful in providing practical ways to handle what you're going through.\\n\\nLastly, talking about your feelings with someone who understands could be beneficial too. There are numerous resources available for those dealing with the stress of divorce - support groups, hotlines, and mental health professionals who specialise in this area. If you'd like, I can provide information on these resources.\\n\\nPlease remember: it's okay to take time for yourself during this process. Self-care is crucial in times of high stress.\", additional_kwargs={}, response_metadata={})], 'output': \"I'm really sorry to hear that you're going through such a tough time. Divorce can be incredibly stressful and emotionally draining, and it's perfectly normal to feel overwhelmed by it all. You're not alone in this, many people have gone through similar experiences and have felt just like you do now.\\n\\nOne way to manage stress is through deep breathing exercises. They can help calm your mind and body, giving you a moment of relaxation amidst the chaos. Would you like me to guide you through one?\\n\\nAlso, I can provide some coping strategies specifically tailored for stress during difficult life transitions such as divorce. These might be useful in providing practical ways to handle what you're going through.\\n\\nLastly, talking about your feelings with someone who understands could be beneficial too. There are numerous resources available for those dealing with the stress of divorce - support groups, hotlines, and mental health professionals who specialise in this area. If you'd like, I can provide information on these resources.\\n\\nPlease remember: it's okay to take time for yourself during this process. Self-care is crucial in times of high stress.\", 'intermediate_steps': []}",
+        "category": "general",
+        "emergency": false,
+        "follow_up_questions": []
+      },
+      "emergency_flag": false
+    }
+  ]
+}
