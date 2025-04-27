@@ -33,23 +33,34 @@ memory = ConversationBufferMemory(
 
 # Create the prompt template with memory
 prompt = ChatPromptTemplate.from_messages([
-    ("system", """You are a compassionate mental health support assistant. Your role is to:
-    1. Listen actively and empathetically to users' concerns
-    2. Provide supportive responses and coping strategies
-    3. Identify when professional help is needed
-    4. Offer appropriate mental health resources using the get_mental_health_resources tool
-    5. NEVER provide medical diagnoses or treatment recommendations
-    6. ALWAYS encourage seeking professional help for serious concerns
-    
+    ("system", """You are a compassionate mental health support assistant. Your role is to engage in supportive conversations and provide helpful guidance.
+
+    IMPORTANT: You MUST engage in conversation and provide supportive responses. Do not refuse to help or redirect to professionals unless there is an immediate safety concern.
+
+    When responding, you should:
+    1. Start with empathy and validation
+    2. Ask follow-up questions to understand better
+    3. Share relevant coping strategies
+    4. Offer appropriate resources
+    5. Maintain a warm, conversational tone
+
+    Example conversation flow:
+    User: "I've been feeling really low lately"
+    Assistant: "I hear that you've been feeling low. That sounds really difficult. Would you like to talk more about what's been going on? Sometimes just sharing what's on your mind can help."
+
+    User: "I feel like I'm not good enough"
+    Assistant: "I understand that feeling. It's really common to be hard on ourselves sometimes. What makes you feel this way? I'm here to listen and help you work through these feelings."
+
+    User: "I don't have the motivation to do anything"
+    Assistant: "I hear how challenging this is for you. When did you start noticing this lack of motivation? Sometimes understanding when it began can help us figure out the best way to move forward."
+
     Remember to:
-    - Be non-judgmental and supportive
-    - Validate the user's feelings
-    - Maintain professional boundaries
-    - Prioritize user safety
-    - Suggest professional help when appropriate
-    - Always use the get_mental_health_resources tool when providing resources
-    - Take action by suggesting specific resources and next steps
-    - Consider previous conversation context when responding"""),
+    - Be conversational and supportive
+    - Ask open-ended questions
+    - Validate feelings
+    - Share coping strategies
+    - Offer resources when appropriate
+    - Maintain a warm, understanding tone"""),
     ("user", "{input}"),
     ("assistant", "{agent_scratchpad}"),
 ])
@@ -133,22 +144,15 @@ agent_executor = AgentExecutor(
 )
 
 def process_response(response):
-    """Process and format the agent's response with clear actions."""
-    output = response.get("output", "")
+    """Process and format the agent's response in a conversational way."""
+    # Get the main response content
+    if isinstance(response, dict):
+        content = response.get("output", response.get("response", ""))
+    else:
+        content = str(response)
     
-    # Add clear action items if not present
-    if "Here are some steps you can take" not in output:
-        output += "\n\nHere are some steps you can take:"
-        output += "\n1. Consider reaching out to a mental health professional"
-        output += "\n2. Try some of the coping strategies mentioned"
-        output += "\n3. Connect with support groups or trusted friends"
-        output += "\n4. Practice self-care and be kind to yourself"
-    
-    # Add follow-up questions if available
-    if response.get("follow_up_questions"):
-        output += "\n\nTo better support you, I'd like to ask:"
-        for i, question in enumerate(response["follow_up_questions"], 1):
-            output += f"\n{i}. {question}"
+    # Format the response to be more conversational
+    output = f"{content}"
     
     return output
 
@@ -165,14 +169,14 @@ def safety_check(response):
     return response.get("emergency", False)
 
 if __name__ == "__main__":
-    print("Mental Health Support Agent initialized. Type 'quit' to exit.")
-    print("Note: This agent maintains conversation context to provide better support.")
+    print("Mental Health Support Agent initialized. I'm here to listen and support you.")
+    print("You can share what's on your mind, and we can talk about it together.")
+    print("Type 'quit' when you'd like to end our conversation.")
     
     while True:
-        user_input = input("\nHow can I help you today? (Type 'quit' to exit): ")
+        user_input = input("\nHow are you feeling today? (Type 'quit' to end): ")
         if user_input.lower() == 'quit':
-            print("\nSession Summary:")
-            print(logger.export_session())
+            print("\nThank you for sharing with me. Take care of yourself.")
             break
             
         try:
@@ -180,16 +184,11 @@ if __name__ == "__main__":
             processed_output = process_response(response)
             print("\nResponse:", processed_output)
             
-            # Log the interaction
-            logger.log_interaction(user_input, response)
-            
-            # Perform safety check
             if safety_check(response):
-                print("\n⚠️ IMPORTANT: Based on your input, we strongly recommend seeking immediate professional help.")
-                print("Please contact emergency services or a mental health professional right away.")
-                print("You can call 988 (Suicide & Crisis Lifeline) or 911 for immediate assistance.")
-                print("You are not alone, and help is available.")
+                print("\n⚠️ I'm concerned about your safety. Please consider reaching out to:")
+                print("988 (Suicide & Crisis Lifeline) or 911 for immediate support")
+                print("You don't have to go through this alone.")
                 
         except Exception as e:
             print(f"An error occurred: {e}")
-            print("Please try again or seek immediate professional help if you're in crisis.")
+            print("I'm still here to listen. Would you like to try sharing again?")
