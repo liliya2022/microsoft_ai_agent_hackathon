@@ -17,7 +17,7 @@ logger = AgentLogger()
 
 # Initialize the LLM with better parameters
 llm = ChatOpenAI(
-    model="gpt-4",
+    model="gpt-4-turbo",
     temperature=0.7,
     max_tokens=1000,
     frequency_penalty=0.5,  # Reduce repetition
