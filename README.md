@@ -65,6 +65,8 @@ If you're in crisis, please contact emergency services or a mental health profes
   - Emergency resource recommendations
   - Professional help encouragement
   - Crisis hotline information (988, 911)
+- **Conversation Memory**: Maintains context throughout the conversation
+- **Safety Monitoring**: Detects crisis situations and provides appropriate resources
 
 ## 📚 Available Resources
 
@@ -92,6 +94,8 @@ The agent provides access to:
 - Implements Pydantic models for structured responses
 - Features automatic emergency detection
 - Includes response processing for clear action items
+- Uses ConversationBufferMemory for maintaining context
+- Implements safety checks for crisis situations
 
 ## 🤝 Contributing
 
@@ -100,6 +104,8 @@ Contributions are welcome! Please feel free to:
 - Improve the response templates
 - Enhance the safety features
 - Add new support tools
+- Improve conversation memory handling
+- Add more comprehensive safety checks
 
 ## 📝 License
 
