@@ -173,8 +173,28 @@ if __name__ == "__main__":
     print("You can share what's on your mind, and we can talk about it together.")
     print("Type 'quit' when you'd like to end our conversation.")
     
+    # Ask the initial question
+    user_input = input("\nHow are you feeling today? (Type 'quit' to end): ")
+    if user_input.lower() == 'quit':
+        print("\nThank you for sharing with me. Take care of yourself.")
+        exit()
+        
+    try:
+        response = agent_executor.invoke({"input": user_input})
+        processed_output = process_response(response)
+        print("\nResponse:", processed_output)
+        
+        if safety_check(response):
+            print("\n⚠️ I'm concerned about your safety. Please consider reaching out to:")
+            print("988 (Suicide & Crisis Lifeline) or 911 for immediate support")
+            print("You don't have to go through this alone.")
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        print("I'm still here to listen. Would you like to try sharing again?")
+    
+    # Continue conversation with simpler prompt
     while True:
-        user_input = input("\nHow are you feeling today? (Type 'quit' to end): ")
+        user_input = input("\nType your message here (Type 'quit' to end): ")
         if user_input.lower() == 'quit':
             print("\nThank you for sharing with me. Take care of yourself.")
             break
