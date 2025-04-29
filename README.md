@@ -107,12 +107,8 @@ Contributions are welcome! Please feel free to:
 - Improve conversation memory handling
 - Add more comprehensive safety checks
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
 ## 🙏 Acknowledgments
 
-- OpenAI for providing the GPT-4 model
+- OpenAI for providing the GPT-4-turbo model
 - LangChain for the framework
 - Mental health organizations for their resources
