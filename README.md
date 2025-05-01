@@ -113,5 +113,6 @@ Contributions are welcome! Please feel free to:
 - LangChain for the framework
 - Mental health organizations for their resources
 
-## 🎥 Upload Video
+## 🎥 Watch Video
+https://www.youtube.com/watch?v=HhKpVXtbAwU
 
